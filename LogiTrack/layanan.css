@@ -1,0 +1,138 @@
+/* Reset & Font Global */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: #3b5982;
+  color: #ffffff;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Layout Wrapper */
+.dashboard-wrapper {
+  display: flex;
+  max-width: 1000px;
+  margin: 20px auto;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: 500px;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: #3b5982;
+  padding: 20px;
+  border-right: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.logo-icon {
+  background-color: #f4ab25;
+  color: #000;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.logo-text h2 {
+  font-size: 16px;
+  color: #f4ab25;
+}
+
+.logo-text p {
+  font-size: 8px;
+  color: #ccc;
+}
+
+.sidebar-menu {
+  list-style: none;
+}
+
+.sidebar-menu li {
+  margin-bottom: 12px;
+}
+
+.sidebar-menu a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 12px 16px;
+  border-radius: 12px;
+}
+
+.sidebar-menu li.active a {
+  background-color: #f4ab25;
+  color: #000000;
+}
+
+/* Content Utama Layanan */
+.dashboard-content {
+  flex: 1;
+  background-color: #ffffff;
+  padding: 30px;
+  color: #333;
+}
+
+.dashboard-content h2 {
+  color: #3b5982;
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+
+/* Tabel Layanan */
+.service-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 13px;
+}
+
+.service-table th {
+  background-color: #3b5982;
+  color: #ffffff;
+  text-align: left;
+  padding: 12px;
+}
+
+.service-table td {
+  padding: 12px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.status-tag {
+  background-color: #27ae60;
+  color: #ffffff;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard-wrapper { flex-direction: column; }
+  .sidebar { width: 100%; }
+}

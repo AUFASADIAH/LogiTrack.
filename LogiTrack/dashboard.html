@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LogiTrack - Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body { background-color: #3b5982; color: #ffffff; min-height: 100vh; padding: 20px; }
+
+    .dashboard-wrapper {
+      display: flex; max-width: 1000px; margin: 20px auto;
+      border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Sidebar */
+    .sidebar { width: 250px; background-color: #3b5982; padding: 20px; }
+    .sidebar-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 30px; }
+    .logo-icon {
+      background-color: #f4ab25; color: #000; width: 40px; height: 40px;
+      border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px;
+    }
+    .logo-text h2 { font-size: 16px; color: #f4ab25; }
+    .logo-text p { font-size: 8px; color: #ccc; }
+
+    .sidebar-menu { list-style: none; }
+    .sidebar-menu li { margin-bottom: 12px; }
+    .sidebar-menu a {
+      display: flex; align-items: center; gap: 12px; color: #ffffff;
+      text-decoration: none; font-size: 15px; font-weight: 600; padding: 12px 16px; border-radius: 12px;
+    }
+    .sidebar-menu li.active a { background-color: #f4ab25; color: #000000; }
+
+    /* Main Content Area */
+    .dashboard-content { flex: 1; background-color: #f4ab25; padding: 25px; color: #333; }
+    .search-bar {
+      background-color: #ffffff; padding: 10px 18px; border-radius: 12px;
+      display: flex; align-items: center; gap: 10px; margin-bottom: 25px; max-width: 400px;
+    }
+    .search-bar input { border: none; outline: none; width: 100%; font-size: 14px; }
+
+    .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .service-card {
+      background-color: #616e7d; border-radius: 15px; padding: 20px;
+      display: flex; gap: 15px; align-items: flex-start; color: #ffffff;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .card-icon {
+      font-size: 26px; color: #27ae60; background-color: rgba(255, 255, 255, 0.1);
+      padding: 10px; border-radius: 10px;
+    }
+    .card-text h3 { font-size: 16px; margin-bottom: 6px; }
+    .card-text p { font-size: 10px; line-height: 1.4; color: #e0e0e0; }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard-wrapper">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-icon"><i class="fa-solid fa-truck-fast"></i></div>
+        <div class="logo-text">
+          <h2>LogiTrack</h2>
+          <p>Sistem Pelacakan Pengiriman</p>
+        </div>
+      </div>
+      <ul class="sidebar-menu">
+        <li class="active"><a href="dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+        <li><a href="layanan.html"><i class="fa-solid fa-pen-to-square"></i> Layanan</a></li>
+        <li><a href="profil.html"><i class="fa-solid fa-user-group"></i> Profil</a></li>
+      </ul>
+    </aside>
+
+    <!-- Content -->
+    <main class="dashboard-content">
+      <div class="search-bar">
+        <i class="fa-solid fa-magnifying-glass" style="color: #666;"></i>
+        <input type="text" placeholder="Cari Layanan">
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="card-icon"><i class="fa-solid fa-plane-departure"></i></div>
+          <div class="card-text">
+            <h3>Ekspress Air</h3>
+            <p>Pengiriman kargo udara darurat via penerbangan komersial dengan waktu sampai 24 jam nasional.</p>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="card-icon"><i class="fa-solid fa-bolt"></i></div>
+          <div class="card-text">
+            <h3>Same Day Express</h3>
+            <p>Layanan titik-ke-titik prioritas tinggi dalam kota dengan waktu antar kurang dari 8 jam.</p>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="card-icon"><i class="fa-solid fa-truck"></i></div>
+          <div class="card-text">
+            <h3>Cargo Land</h3>
+            <p>Solusi ekonomis untuk barang berat dan muatan besar menggunakan armada truk terintegrasi.</p>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="card-icon"><i class="fa-solid fa-snowflake"></i></div>
+          <div class="card-text">
+            <h3>Cold Chain Express</h3>
+            <p>Pengiriman khusus barang sensitif suhu dengan truk pendingin bersuhu terkontrol.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LogiTrack - Layanan</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body { background-color: #3b5982; color: #ffffff; min-height: 100vh; padding: 20px; }
+
+    .dashboard-wrapper {
+      display: flex; max-width: 1000px; margin: 20px auto;
+      border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .sidebar { width: 250px; background-color: #3b5982; padding: 20px; }
+    .sidebar-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 30px; }
+    .logo-icon {
+      background-color: #f4ab25; color: #000; width: 40px; height: 40px;
+      border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px;
+    }
+    .logo-text h2 { font-size: 16px; color: #f4ab25; }
+    .logo-text p { font-size: 8px; color: #ccc; }
+
+    .sidebar-menu { list-style: none; }
+    .sidebar-menu li { margin-bottom: 12px; }
+    .sidebar-menu a {
+      display: flex; align-items: center; gap: 12px; color: #ffffff;
+      text-decoration: none; font-size: 15px; font-weight: 600; padding: 12px 16px; border-radius: 12px;
+    }
+    .sidebar-menu li.active a { background-color: #f4ab25; color: #000000; }
+
+    .dashboard-content { flex: 1; background-color: #ffffff; padding: 30px; color: #333; }
+    .dashboard-content h2 { color: #3b5982; margin-bottom: 20px; font-size: 22px; }
+
+    .service-table {
+      width: 100%; border-collapse: collapse; background-color: #f8f9fa;
+      border-radius: 8px; overflow: hidden; font-size: 13px;
+    }
+    .service-table th { background-color: #3b5982; color: #ffffff; text-align: left; padding: 12px; }
+    .service-table td { padding: 12px; border-bottom: 1px solid #e0e0e0; }
+    .status-tag {
+      background-color: #27ae60; color: #fff; padding: 4px 8px;
+      border-radius: 6px; font-size: 11px; font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard-wrapper">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-icon"><i class="fa-solid fa-truck-fast"></i></div>
+        <div class="logo-text">
+          <h2>LogiTrack</h2>
+          <p>Sistem Pelacakan Pengiriman</p>
+        </div>
+      </div>
+      <ul class="sidebar-menu">
+        <li><a href="dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+        <li class="active"><a href="layanan.html"><i class="fa-solid fa-pen-to-square"></i> Layanan</a></li>
+        <li><a href="profil.html"><i class="fa-solid fa-user-group"></i> Profil</a></li>
+      </ul>
+    </aside>
+
+    <!-- Content -->
+    <main class="dashboard-content">
+      <h2>Daftar Layanan LogiTrack</h2>
+      <table class="service-table">
+        <thead>
+          <tr>
+            <th>Jenis Layanan</th>
+            <th>Estimasi Waktu</th>
+            <th>Jangkauan</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Ekspress Air</strong></td>
+            <td>24 Jam</td>
+            <td>Nasional</td>
+            <td><span class="status-tag">Tersedia</span></td>
+          </tr>
+          <tr>
+            <td><strong>Same Day Express</strong></td>
+            <td>< 8 Jam</td>
+            <td>Dalam Kota</td>
+            <td><span class="status-tag">Tersedia</span></td>
+          </tr>
+          <tr>
+            <td><strong>Cargo Land</strong></td>
+            <td>2 - 4 Hari</td>
+            <td>Antar Kota / Pulau</td>
+            <td><span class="status-tag">Tersedia</span></td>
+          </tr>
+          <tr>
+            <td><strong>Cold Chain Express</strong></td>
+            <td>1 - 2 Hari</td>
+            <td>Nasional</td>
+            <td><span class="status-tag">Tersedia</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+  </div>
+
+</body>
+</html>
