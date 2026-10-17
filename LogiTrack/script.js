@@ -1,65 +1,120 @@
-// 1. Toast Notification Function
-function showToast(message, type = 'info') {
-  const toastContainer = document.getElementById('toast-container');
-  const toast = document.createElement('div');
-  toast.className = `toast toast-${type}`;
-  
-  let icon = 'fa-info-circle';
-  if (type === 'success') icon = 'fa-circle-check';
-  if (type === 'error') icon = 'fa-circle-exclamation';
+// =======================================================
+// 1. PROMISE & ASYNCHRONOUS (SIMULASI DELAY LOADING)
+// =======================================================
 
-  toast.innerHTML = `<i class="fa-solid ${icon}"></i> <span>${message}</span>`;
-  toastContainer.appendChild(toast);
-
-  setTimeout(() => {
-    toast.remove();
-  }, 3000);
+// Fungsi membuat Promise untuk memberikan jeda waktu (delay)
+function simulasiDelayProcess(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-// 2. DOM 1: Validasi Lacak Paket
+
+// =======================================================
+// 2. FETCH API & ASYNC/AWAIT (PENGAMBILAN DATA SERVER)
+// =======================================================
+
+// Fungsi Asynchronous untuk melakukan lacak resi
+async function lacakResiSimulasi(resi) {
+  const btnLacak = document.getElementById('btn-lacak');
+  const inputResi = document.getElementById('input-resi');
+
+  // Menampilkan status loading pada tombol
+  showToast('Memeriksa data ke server...', 'info');
+  btnLacak.innerText = 'Memproses...';
+  btnLacak.disabled = true;
+
+  try {
+    // FETCH API: Mengambil data dummy dari server publik
+    const response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+    const data = await response.json();
+
+    // PROMISE: Menunggu proses delay selama 1.5 detik (1500 ms)
+    await simulasiDelayProcess(1500);
+
+    // Menampilkan pesan sukses
+    showToast(`Paket dengan nomor resi ${resi} ditemukan! Status: Dalam Pengiriman`, 'success');
+    
+    // Simpan nomor resi ke Web Storage
+    simpanKeStorage(resi);
+    
+    inputResi.value = ''; // Kosongkan input
+  } catch (error) {
+    showToast('Gagal terhubung ke server!', 'error');
+  } finally {
+    // Mengembalikan status tombol seperti semula
+    btnLacak.innerText = 'Lacak Paket';
+    btnLacak.disabled = false;
+  }
+}
+
+
+// =======================================================
+// 3. WEB STORAGE (localStorage)
+// =======================================================
+
+// Fungsi menyimpan resi ke localStorage
+function simpanKeStorage(resi) {
+  // Ambil data lama dari localStorage (jika ada), jika tidak buat array kosong
+  let riwayat = JSON.parse(localStorage.getItem('riwayatResiLogiTrack')) || [];
+
+  // Mencegah duplikasi nomor resi
+  if (!riwayat.includes(resi)) {
+    riwayat.push(resi);
+    // Simpan kembali array ke localStorage dalam bentuk string JSON
+    localStorage.setItem('riwayatResiLogiTrack', JSON.stringify(riwayat));
+  }
+
+  // Tampilkan riwayat terbaru ke halaman
+  muatRiwayatDariStorage();
+}
+
+// Fungsi membaca data dari localStorage dan menampilkan ke HTML (DOM)
+function muatRiwayatDariStorage() {
+  const historyList = document.getElementById('history-list');
+  if (!historyList) return;
+
+  historyList.innerHTML = ''; // Bersihkan kontainer
+  
+  // Baca data dari localStorage
+  let riwayat = JSON.parse(localStorage.getItem('riwayatResiLogiTrack')) || [];
+
+  // Loop setiap resi dan buat elemen tag secara dinamis
+  riwayat.forEach(resi => {
+    const tagResi = document.createElement('span');
+    tagResi.className = 'history-tag';
+    tagResi.innerText = `#${resi}`;
+
+    // Event click untuk memasukkan kembali resi ke kolom input
+    tagResi.addEventListener('click', function () {
+      document.getElementById('input-resi').value = resi;
+      showToast(`Nomor resi #${resi} dimuat kembali.`, 'info');
+    });
+
+    historyList.appendChild(tagResi);
+  });
+}
+
+
+// =======================================================
+// 4. EVENT LISTENERS & INTEGRASI
+// =======================================================
+
+// Memuat riwayat dari localStorage saat pertama kali halaman selesai dimuat
+document.addEventListener('DOMContentLoaded', muatRiwayatDariStorage);
+
+// Event Click pada tombol Lacak Paket
 const btnLacak = document.getElementById('btn-lacak');
 const inputResi = document.getElementById('input-resi');
 
 if (btnLacak && inputResi) {
   btnLacak.addEventListener('click', function () {
     const nomorResi = inputResi.value.trim();
+
     if (nomorResi === '') {
+      alert('Peringatan: Nomor resi tidak boleh kosong!');
       showToast('Harap masukkan nomor resi terlebih dahulu!', 'error');
     } else {
-      showToast(`Paket dengan nomor resi ${nomorResi} ditemukan!`, 'success');
-      tambahRiwayat(nomorResi);
-      inputResi.value = '';
+      // Panggil fungsi Async Fetch API
+      lacakResiSimulasi(nomorResi);
     }
   });
-}
-
-// 3. DOM 2: Toggle Mode Terang/Gelap
-const btnTheme = document.getElementById('btn-theme');
-if (btnTheme) {
-  btnTheme.addEventListener('click', function () {
-    document.body.classList.toggle('light-mode');
-    if (document.body.classList.contains('light-mode')) {
-      btnTheme.innerHTML = '<i class="fa-solid fa-sun"></i> Terang';
-      showToast('Berhasil mengubah ke Mode Terang', 'info');
-    } else {
-      btnTheme.innerHTML = '<i class="fa-solid fa-moon"></i> Mode';
-      showToast('Berhasil mengubah ke Mode Gelap', 'info');
-    }
-  });
-}
-
-// 4. DOM 3: Tambah Tag Riwayat Resi Dinamis
-const historyList = document.getElementById('history-list');
-function tambahRiwayat(resi) {
-  if (!historyList) return;
-  const tagResi = document.createElement('span');
-  tagResi.className = 'history-tag';
-  tagResi.innerText = `#${resi}`;
-
-  tagResi.addEventListener('click', function () {
-    inputResi.value = resi;
-    showToast(`Nomor resi #${resi} dimuat kembali.`, 'info');
-  });
-
-  historyList.appendChild(tagResi);
 }
